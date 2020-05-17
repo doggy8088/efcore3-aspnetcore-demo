@@ -43,25 +43,32 @@ namespace efcore3_aspnetcore_demo.Controllers
         [HttpGet("{id}")]
         public ActionResult<Blog> GetBlogById(int id)
         {
-            return null;
+            return db.Blogs.Find(id);
         }
 
         // POST api/blogs
         [HttpPost("")]
         public void PostBlog(Blog value)
         {
+            db.Blogs.Add(value);
+            db.SaveChanges();
         }
 
         // PUT api/blogs/5
         [HttpPut("{id}")]
         public void PutBlog(int id, Blog value)
         {
+            db.Blogs.Update(value);
+            db.SaveChanges();
         }
 
         // DELETE api/blogs/5
         [HttpDelete("{id}")]
         public void DeleteBlogById(int id)
         {
+            var blog = db.Blogs.Find(id);
+            db.Blogs.Remove(blog);
+            db.SaveChanges();
         }
     }
 }
